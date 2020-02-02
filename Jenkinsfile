@@ -44,7 +44,7 @@ pipeline {
         stage('Build image') {
             steps {
                 container('docker') {
-                    git 'https://github.com/zembutsu/docker-sample-nginx.git'
+                    git 'https://github.com/kiteflyer69/docker-sample-nginx.git'
                     container('docker') {
                         sh 'docker version && DOCKER_BUILDKIT=1 docker build --progress plain -t kiteflyer69/nginx-example .'
                         sh 'docker images'
@@ -58,8 +58,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 container('kubectl') {
-                    sh "ls -al"
-                    sh "kubectl get nodes"
                     sh "kubectl apply -f ./demo.yaml"
                 }
             }
